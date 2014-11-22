@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2014 5:12:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sample.entity.Book" table="Book" schema="dbo" catalog="UniversityLibrary">
+        <id name="isbn" type="serializable">
+            <column name="ISBN" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="publisher" class="sample.entity.Publisher" fetch="select">
+            <column name="PublisherID" not-null="true" />
+        </many-to-one>
+        <property name="title" type="serializable">
+            <column name="Title" not-null="true" />
+        </property>
+        <property name="author" type="serializable">
+            <column name="Author" />
+        </property>
+        <property name="publishYear" type="timestamp">
+            <column name="PublishYear" length="23" not-null="true" />
+        </property>
+        <property name="image" type="serializable">
+            <column name="Image" />
+        </property>
+        <property name="about" type="serializable">
+            <column name="About" />
+        </property>
+        <property name="price" type="double">
+            <column name="Price" precision="53" scale="0" not-null="true" />
+        </property>
+        <property name="dueTime" type="int">
+            <column name="DueTime" not-null="true" />
+        </property>
+        <property name="isAble" type="boolean">
+            <column name="IsAble" not-null="true" />
+        </property>
+        <property name="numOfCopy" type="int">
+            <column name="NumOfCopy" not-null="true" />
+        </property>
+        <property name="copiesAvailable" type="int">
+            <column name="CopiesAvailable" not-null="true" />
+        </property>
+        <property name="borrowTimes" type="int">
+            <column name="BorrowTimes" not-null="true" />
+        </property>
+        <property name="orderTimes" type="int">
+            <column name="OrderTimes" not-null="true" />
+        </property>
+        <set name="tags" inverse="false" table="Book_Tag">
+            <key>
+                <column name="ISBN" not-null="true" />
+            </key>
+            <many-to-many entity-name="sample.entity.Tag">
+                <column name="TagName" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="orders" inverse="true">
+            <key>
+                <column name="ISBN" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="sample.entity.Order" />
+        </set>
+        <set name="copies" inverse="true">
+            <key>
+                <column name="ISBN" />
+            </key>
+            <one-to-many class="sample.entity.Copy" />
+        </set>
+        <set name="authors" inverse="false" table="BookAuthor">
+            <key>
+                <column name="BookISBN" not-null="true" />
+            </key>
+            <many-to-many entity-name="sample.entity.Author">
+                <column name="AuthorID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

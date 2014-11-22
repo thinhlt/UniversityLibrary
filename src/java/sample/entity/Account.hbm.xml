@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2014 5:12:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sample.entity.Account" table="Account" schema="dbo" catalog="UniversityLibrary">
+        <id name="userId" type="serializable">
+            <column name="UserID" />
+            <generator class="assigned" />
+        </id>
+        <property name="username" type="serializable">
+            <column name="Username" not-null="true" />
+        </property>
+        <property name="password" type="serializable">
+            <column name="Password" not-null="true" />
+        </property>
+        <property name="roles" type="serializable">
+            <column name="Roles" not-null="true" />
+        </property>
+        <property name="firstname" type="serializable">
+            <column name="Firstname" not-null="true" />
+        </property>
+        <property name="middlename" type="serializable">
+            <column name="Middlename" />
+        </property>
+        <property name="lastname" type="serializable">
+            <column name="Lastname" not-null="true" />
+        </property>
+        <property name="email" type="serializable">
+            <column name="Email" not-null="true" />
+        </property>
+        <property name="address" type="serializable">
+            <column name="Address" not-null="true" />
+        </property>
+        <property name="phone" type="serializable">
+            <column name="Phone" not-null="true" />
+        </property>
+        <property name="avartar" type="serializable">
+            <column name="Avartar" not-null="true" />
+        </property>
+        <property name="isAble" type="boolean">
+            <column name="IsAble" not-null="true" />
+        </property>
+        <set name="orders" inverse="true">
+            <key>
+                <column name="UserID" not-null="true" />
+            </key>
+            <one-to-many class="sample.entity.Order" />
+        </set>
+        <set name="borrowsForAccepter" inverse="true">
+            <key>
+                <column name="Accepter" not-null="true" />
+            </key>
+            <one-to-many class="sample.entity.Borrow" />
+        </set>
+        <set name="borrowsForBorrower" inverse="true">
+            <key>
+                <column name="Borrower" not-null="true" />
+            </key>
+            <one-to-many class="sample.entity.Borrow" />
+        </set>
+    </class>
+</hibernate-mapping>

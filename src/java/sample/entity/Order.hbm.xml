@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2014 5:12:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sample.entity.Order" table="Order" schema="dbo" catalog="UniversityLibrary">
+        <id name="isbn" type="binary">
+            <column name="ISBN" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="book" class="sample.entity.Book" update="false" insert="false" fetch="select">
+            <column name="ISBN" not-null="true" unique="true" />
+        </many-to-one>
+        <many-to-one name="account" class="sample.entity.Account" fetch="select">
+            <column name="UserID" not-null="true" />
+        </many-to-one>
+        <property name="orderDate" type="timestamp">
+            <column name="OrderDate" length="23" not-null="true" />
+        </property>
+        <property name="requireDate" type="timestamp">
+            <column name="RequireDate" length="23" />
+        </property>
+        <property name="returnDate" type="timestamp">
+            <column name="ReturnDate" length="23" />
+        </property>
+        <property name="status" type="serializable">
+            <column name="Status" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

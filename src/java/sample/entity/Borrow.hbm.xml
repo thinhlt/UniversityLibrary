@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2014 5:12:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sample.entity.Borrow" table="Borrow" schema="dbo" catalog="UniversityLibrary">
+        <id name="borrowId" type="int">
+            <column name="BorrowID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="accountByBorrower" class="sample.entity.Account" fetch="select">
+            <column name="Borrower" not-null="true" />
+        </many-to-one>
+        <many-to-one name="accountByAccepter" class="sample.entity.Account" fetch="select">
+            <column name="Accepter" not-null="true" />
+        </many-to-one>
+        <many-to-one name="copy" class="sample.entity.Copy" fetch="select">
+            <column name="Barcode" not-null="true" />
+        </many-to-one>
+        <property name="borrowDate" type="timestamp">
+            <column name="BorrowDate" length="23" not-null="true" />
+        </property>
+        <property name="deadline" type="timestamp">
+            <column name="Deadline" length="23" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

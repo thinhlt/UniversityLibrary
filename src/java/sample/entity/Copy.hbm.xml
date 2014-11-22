@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2014 5:12:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sample.entity.Copy" table="Copy" schema="dbo" catalog="UniversityLibrary">
+        <id name="barcode" type="int">
+            <column name="Barcode" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="book" class="sample.entity.Book" fetch="select">
+            <column name="ISBN" />
+        </many-to-one>
+        <many-to-one name="magazine" class="sample.entity.Magazine" fetch="select">
+            <column name="ISSN" />
+        </many-to-one>
+        <property name="isAvailable" type="boolean">
+            <column name="IsAvailable" not-null="true" />
+        </property>
+        <property name="isAble" type="boolean">
+            <column name="IsAble" not-null="true" />
+        </property>
+        <set name="borrows" inverse="true">
+            <key>
+                <column name="Barcode" not-null="true" />
+            </key>
+            <one-to-many class="sample.entity.Borrow" />
+        </set>
+    </class>
+</hibernate-mapping>

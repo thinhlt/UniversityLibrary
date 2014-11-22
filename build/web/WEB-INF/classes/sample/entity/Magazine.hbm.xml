@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2014 5:12:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sample.entity.Magazine" table="Magazine" schema="dbo" catalog="UniversityLibrary">
+        <id name="issn" type="serializable">
+            <column name="ISSN" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="publisher" class="sample.entity.Publisher" fetch="select">
+            <column name="Publisher" not-null="true" />
+        </many-to-one>
+        <property name="image" type="serializable">
+            <column name="Image" not-null="true" />
+        </property>
+        <property name="about" type="serializable">
+            <column name="About" not-null="true" />
+        </property>
+        <property name="price" type="double">
+            <column name="Price" precision="53" scale="0" not-null="true" />
+        </property>
+        <property name="borrowTime" type="int">
+            <column name="BorrowTime" not-null="true" />
+        </property>
+        <property name="isAble" type="java.lang.Boolean">
+            <column name="IsAble" />
+        </property>
+        <property name="numOfCopies" type="int">
+            <column name="NumOfCopies" not-null="true" />
+        </property>
+        <property name="copiesAvailable" type="int">
+            <column name="CopiesAvailable" not-null="true" />
+        </property>
+        <property name="borrowTimes" type="int">
+            <column name="BorrowTimes" not-null="true" />
+        </property>
+        <property name="orderTimes" type="int">
+            <column name="OrderTimes" not-null="true" />
+        </property>
+        <set name="copies" inverse="true">
+            <key>
+                <column name="ISSN" />
+            </key>
+            <one-to-many class="sample.entity.Copy" />
+        </set>
+    </class>
+</hibernate-mapping>

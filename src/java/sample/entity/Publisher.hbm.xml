@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2014 5:12:10 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sample.entity.Publisher" table="Publisher" schema="dbo" catalog="UniversityLibrary">
+        <id name="publisherId" type="int">
+            <column name="PublisherID" />
+            <generator class="assigned" />
+        </id>
+        <property name="companyName" type="serializable">
+            <column name="CompanyName" not-null="true" />
+        </property>
+        <property name="address" type="serializable">
+            <column name="Address" not-null="true" />
+        </property>
+        <property name="phone" type="serializable">
+            <column name="Phone" not-null="true" />
+        </property>
+        <property name="email" type="serializable">
+            <column name="Email" not-null="true" />
+        </property>
+        <property name="logo" type="serializable">
+            <column name="Logo" not-null="true" />
+        </property>
+        <set name="magazines" inverse="true">
+            <key>
+                <column name="Publisher" not-null="true" />
+            </key>
+            <one-to-many class="sample.entity.Magazine" />
+        </set>
+        <set name="books" inverse="true">
+            <key>
+                <column name="PublisherID" not-null="true" />
+            </key>
+            <one-to-many class="sample.entity.Book" />
+        </set>
+    </class>
+</hibernate-mapping>
